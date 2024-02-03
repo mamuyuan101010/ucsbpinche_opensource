@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        .menu {
+            margin: 20px 0;
+        }
+        .menu a {
+            text-decoration: none;
+            color: white;
+            background-color: #007bff;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin: 5px;
+            display: inline-block;
+        }
+        .menu a:hover {
+            background-color: #0056b3;
+        }
+        .btn-danger {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+        form {
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .footer {
+            margin-top: auto;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        form.logout-form {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome {{ username }}</h1>
+    <div class="menu">
+        <a href="/car">See Your Car</a>
+        <a href="/change_password">Change Password</a>
+        <a href="/change_passphrase">Change Passphrase</a>
+        <a href="/order">My Orders</a>
+        <a href="/ride_request">Request a Ride</a>
+        <a href="/driver_request">Plan a Drive</a>
+    </div>
+    <h2>Ride Requests</h2>
+    <table>
+        <tr>
+            <th>Request ID</th>
+            <th>Rider Username</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Start Point</th>
+            <th>Destination</th>
+            <th>Note</th>
+        </tr>
+        {% for request in ride_requests %}
+            <tr>
+                <td>{{ request.request_id }}</td>
+                <td>{{ request.rider_username }}</td>
+                <td>{{ request.date }}</td>
+                <td>{{ request.time }}</td>
+                <td>{{ request.start_point }}</td>
+                <td>{{ request.destination }}</td>
+                <td>{{ request.note }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Driver Requests</h2>
+    <table>
+        <tr>
+            <th>Request ID</th>
+            <th>Driver Username</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Start Point</th>
+            <th>Destination</th>
+            <th>Note</th>
+            <th>Car Brand</th>
+            <th>Car Style</th>
+            <th>Car Plate</th>
+        </tr>
+        {% for request in driver_requests %}
+            <tr>
+                <td>{{ request.request_id }}</td>
+                <td>{{ request.driver_username }}</td>
+                <td>{{ request.date }}</td>
+                <td>{{ request.time }}</td>
+                <td>{{ request.start_point }}</td>
+                <td>{{ request.destination }}</td>
+                <td>{{ request.note }}</td>
+                <td>{{ request.car_brand }}</td>
+                <td>{{ request.car_style }}</td>
+                <td>{{ request.car_plate }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    <div class="footer">
+        <form action="/logout" method="post" class="logout-form">
+            <button type="submit" class="btn btn-danger">Logout</button>
+        </form>
+    </div>
+</body>
+</html>
+

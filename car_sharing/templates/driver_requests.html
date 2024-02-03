@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Driver Requests</title>
+    <style>
+        /* CSS Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f7f7f7;
+            padding: 40px;
+            text-align: center;
+        }
+
+        h1, h2 {
+            color: #1a202c;
+            margin-bottom: 20px;
+        }
+
+        form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            margin-bottom: 40px;
+        }
+
+        form label, form input, button {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        form label {
+            color: #4a5568;
+            font-weight: bold;
+        }
+
+        form input {
+            padding: 8px;
+            border: 1px solid #cbd5e0;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #4c51bf;
+            color: white;
+            padding: 6px 12px; /* Reduced padding */
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px; /* Smaller font size */
+            transition: background-color 0.3s;
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        button:hover {
+            background-color: #434190;
+        }
+
+        .back_home {
+            background-color: #4c51bf; /* Example background color */
+            color: white; /* Text color */
+            padding: 8px 16px; /* Adjusted padding, you can change these values */
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px; /* Font size */
+            transition: background-color 0.3s;
+            text-align: center; /* Center the text inside the button */
+            display: inline-block; /* Make the button inline-block if you want to set a width */
+            width: auto; /* Adjust width as needed, 'auto' will size according to content */
+            margin-top: 10px; /* Spacing from the top */
+        }
+
+        .button-container {
+            display: flex;
+            align-items: center; /* Vertically center align buttons */
+            justify-content: center; /* Horizontally center buttons in the container */
+            gap: 5px; /* Space between buttons */
+        }
+
+        .button-container button, 
+        .button-container form {
+            margin: 0; /* Removes any margin */
+            padding: 0; /* Removes any padding */
+        }
+
+        .add-button, .delete-button {
+            padding: 6px 15px; /* Adjust padding to control the size */
+            margin: 0 5px; /* Adds margin to the left and right of the button */
+            font-size: 16px; /* Adjust font size for buttons */
+            line-height: 1.5; /* Standard line height for buttons */
+            height: 36px; /* Explicitly set the height for the buttons */
+            width: 70px; /* set width*/
+        }
+
+        .add-button {
+            background-color: green;
+        }
+
+        .add-button:hover {
+            background-color: rgb(31, 100, 31);
+        }
+
+        .delete-button {
+            background-color: red;
+        }
+
+        .delete-button:hover {
+            background-color: rgb(147, 14, 14);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: auto;
+        }
+
+        table, th, td {
+            border: 1px solid #000000;
+            vertical-align: middle; /* Centers content vertically */
+            text-align: center;
+            padding: 10px; /* Added padding for table cells */
+        }
+
+        tr:nth-child(even) {
+            background-color: #f0fff4;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            padding-top: 100px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        .close {
+            color: #aaaaaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h2>Manage Drive Requests</h2>
+
+    <form id="driverRequestForm" action="/driver_request" method="post">
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" required>
+        <label for="time">Time:</label>
+        <input type="time" id="time" name="time" required>
+        <label for="start_point">Start Point:</label>
+        <input type="text" id="start_point" name="start_point" required>
+        <label for="end_point">Destination:</label>
+        <input type="text" id="destination" name="destination" required>
+        <label for="note">Note you want to leave:</label>
+        <input type="text" id="note" name="note" required>
+        <button type="submit">Submit Request</button>
+    </form>
+
+        <!-- The Modal -->
+        <div id="modal" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <form id="addRiderForm" method="post">
+                    <!-- Add hidden input to store request ID -->
+                    <input type="hidden" id="requestId" name="request_id">
+                    <label for="rider_username">Rider's Username:</label>
+                    <input type="text" id="rider_username" name="rider_username" required>
+                    <label for="rider_passphrase">Rider's Passphrase:</label>
+                    <input type="password" id="rider_passphrase" name="rider_passphrase" required>
+                    <button type="submit">Add Rider</button>
+                </form>
+            </div>
+        </div>
+
+    <h2>Your Driver Requests</h2>
+    <table id="driverRequestsTable">
+        <tr>
+            <th>Request Id</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Start Point</th>
+            <th>Destination</th>
+            <th>Note</th>
+            <th>Add / Delete</th>
+        </tr>
+        {% for request in driver_requests %}
+        <tr>
+            <td>{{ request['request_id'] }}</td>
+            <td>{{ request['date'] }}</td>
+            <td>{{ request['time'] }}</td>
+            <td>{{ request['start_point'] }}</td>
+            <td>{{ request['destination'] }}</td>
+            <td>{{ request['note'] }}</td>
+            <td>
+                <div class="button-container">
+                    <button type="button" class="add-button" onclick="openModal( {{ request['request_id'] }} )">Add</button>
+                    <form action="/delete_driver_request/{{ request['request_id'] }}" method="post">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button type="submit" class="delete-button">Delete</button>
+                    </form>
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <!-- back to home button-->
+    <button onclick="window.location.href='/';">
+        Back to Home
+    </button>
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById("modal");
+    
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+    
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+    
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    
+        // Function to open modal and set request ID
+        function openModal(requestId) {
+        var form = document.getElementById("addRiderForm");
+        form.action = "/add_rider/" + requestId;
+        modal.style.display = "block";
+
+        // Prevent default form submission behavior
+        event.preventDefault();
+        }
+
+    </script>
+</body>
+</html>

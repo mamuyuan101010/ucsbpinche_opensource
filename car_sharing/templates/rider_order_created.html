@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f7f7f7;
+            padding: 40px;
+            text-align: center;
+        }
+
+        h1, h2 {
+            color: #1a202c;
+            margin-bottom: 20px;
+        }
+        button {
+            background-color: #4c51bf;
+            color: white;
+            padding: 6px 12px; /* Reduced padding */
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px; /* Smaller font size */
+            transition: background-color 0.3s;
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        button:hover {
+            background-color: #434190;
+        }
+    </style>
+</head>
+<body>
+    <h1>Your Order has been successfully Created</h1>
+    <button onclick="window.location.href='/order';">
+        See My Order
+    </button>
+    <button onclick="window.location.href='/ride_request';">
+        Back to Request
+    </button>
+</body>
+</html>

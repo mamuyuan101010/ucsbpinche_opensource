@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="5;url=/your-original-page">
+    <title>Request Deleted</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .message {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="message">
+        <h1>Request Deleted</h1>
+        <p>You will be redirected back in 2 seconds...</p>
+    </div>
+    <script>
+        setTimeout(function() {
+            window.location.href = '/ride_request';
+        }, 2000); 
+    </script>
+</body>
+</html>

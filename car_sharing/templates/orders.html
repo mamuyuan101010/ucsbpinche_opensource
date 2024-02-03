@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #007bff;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #007bff;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Order Details</h1>
+    <table>
+        <tr>
+            <th>Passenger Name</th>
+            <th>Driver Name</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Start Point</th>
+            <th>Destination</th>
+            <th>Car Brand</th>
+            <th>Car Style</th>
+            <th>Car Plate</th>
+        </tr>
+        {% for order in orders %}
+        <tr>
+            <td>{{ order.passenger_name }}</td>
+            <td>{{ order.driver_name }}</td>
+            <td>{{ order.date }}</td>
+            <td>{{ order.time }}</td>
+            <td>{{ order.start_point }}</td>
+            <td>{{ order.destination }}</td>
+            <td>{{ order.brand }}</td>
+            <td>{{ order.style }}</td>
+            <td>{{ order.plate }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <button onclick="window.location.href='/';">
+        Back to Home
+    </button>
+</body>
+</html>

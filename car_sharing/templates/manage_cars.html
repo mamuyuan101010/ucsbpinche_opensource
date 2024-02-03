@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Management</title>
+    <style>
+         body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            padding: 20px;
+            text-align: center;
+        }
+        h1, h2 {
+            color: #333;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        table {
+            width: 60%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #007bff;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Manage Your Cars</h1>
+
+    <!-- Car Submission Form -->
+    <form id="carForm">
+        <label for="brand">Brand:</label>
+        <input type="text" id="brand" name="brand" required><br><br>
+
+        <label for="style">Style:</label>
+        <input type="text" id="style" name="style" required><br><br>
+
+        <label for="plate">Plate:</label>
+        <input type="text" id="plate" name="plate" required><br><br>
+
+        <button type="submit">Submit Car</button>
+    </form>
+
+    <!-- Display Cars Table -->
+    <h2>Your Cars</h2>
+<table id="carsTable">
+    <tr>
+        <th>Car ID</th>
+        <th>Brand</th>
+        <th>Style</th>
+        <th>Plate</th>
+    </tr>
+    {% for car in cars %}
+    <tr>
+        <td>{{ car.car_id }}</td>
+        <td>{{ car.brand }}</td>
+        <td>{{ car.style }}</td>
+        <td>{{ car.plate }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<!-- back to home button-->
+<button onclick="window.location.href='/';">
+    Back to Home
+  </button>
+
+    <script>
+        document.getElementById('carForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Collect form data
+            var brand = document.getElementById('brand').value;
+            var style = document.getElementById('style').value;
+            var plate = document.getElementById('plate').value;
+
+            // Make an AJAX request to your server
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/car', true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.send(JSON.stringify({ brand: brand, style: style, plate: plate }));
+
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    // reload page
+                    location.reload();
+                } else {
+                    console.error('Error in submission');
+                }
+            };
+        });
+
+        function updateTable() {
+            // Make an AJAX GET request to fetch car data
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', '/car', true);
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    var cars = JSON.parse(xhr.responseText);
+                    var table = document.getElementById('carsTable');
+                    // Clear existing rows except the header
+                    table.innerHTML = table.rows[0].innerHTML;
+
+                    // Add new rows
+                    cars.forEach(function(car) {
+                        var row = table.insertRow();
+                        row.innerHTML = '<td>' + car.car_id + '</td>' +
+                                        '<td>' + car.brand + '</td>' +
+                                        '<td>' + car.style + '</td>' +
+                                        '<td>' + car.plate + '</td>';
+                    });
+                }
+            };
+            xhr.send();
+        }
+
+        // Initially load car data
+        updateTable();
+    </script>
+</body>
+</html>

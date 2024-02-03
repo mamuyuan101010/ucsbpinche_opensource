@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - 拼车网</title>
+    <style>
+        /* CSS styles go here */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #535088;
+        }
+
+        header {
+            background-color: #3854b1;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #324687;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            margin: 0 10px;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .center-image {
+            text-align: center;
+        }
+
+        .center-image img {
+            transition: transform 0.3s ease;
+        }
+
+        /* Header Link Animation */
+        .header-link {
+            transition: all 3s ease;
+            display: inline-block;
+            /* Required for transform */
+        }
+
+        .header-link:hover {
+            color: #ceb3a1;
+            /* Change color on hover */
+            transform: rotate(-5deg) scale(1.1);
+            /* Rotate and scale on hover */
+        }
+
+
+        @media (max-width: 768px) {
+            body {
+                font-size: 14px;
+            }
+
+            header,
+            footer {
+                padding: 10px;
+            }
+
+            nav a {
+                margin: 0 5px;
+                font-size: 14px;
+            }
+
+            .center-image img {
+                max-width: 100%;
+                height: auto;
+            }
+
+            p,
+            h2 {
+                padding-left: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>关于我们 - 拼车网</h1>
+    </header>
+    <nav>
+        <a class="header-link" href="/index.html">首页</a>
+        <a class="header-link" href="/about.html">关于我们</a>
+        <a class="header-link" href="/service.html">拼车服务</a>
+        <a class="header-link" href="/contact.html">联系我们</a>
+    </nav>
+
+    <main>
+        <h2>创建者</h2>
+        <p>本网站的创建者是一名来自波士顿的CS专业匿名本科生，本网站的创建目的是为了方便各位UCSB的中国学生能更加方便地找到拼车伙伴</p>
+        <h2>我们的使命</h2>
+        <p>我们致力于为ucsb学生提供高效、安全的拼车匹配服务，便利校园出行便利。</p>
+        <h2>网站运营</h2>
+        <p>首先，本网站为公益网站，不收取任何费用，并且为保证网站信息安全，所有源代码将上传<a href="https://github.com/mamuyuan101010/ucsbpinche.git" target="_blank">github</a>以便于大众监督。其次，由于网站的编写者为本科生，计算机相关知识功底并不健全，因此欢迎各位CS及相关专业的技术大牛们向网站编写者提出代码修改建议，以便更好地完善该网站</p>
+        <h2>使用该网站</h2>
+        <p>为确保各位拼车时的安全，本网站在注册时需验证各位同学的个人信息，目前只开放UCSB的在校师生及校友使用该网站，后续我们会逐步放宽条件开放给更多用户</p>
+    </main>
+
+    <footer>
+        &copy; 2023 ucsbpinche.com
+    </footer>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - 拼车网</title>
+    <style>
+        /* CSS styles go here */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #535088;
+        }
+
+        header {
+            background-color: #3854b1;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #324687;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            margin: 0 10px;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .center-image {
+            text-align: center;
+        }
+
+        .center-image img {
+            transition: transform 0.3s ease;
+        }
+
+        /* Header Link Animation */
+        .header-link {
+            transition: all 3s ease;
+            display: inline-block;
+            /* Required for transform */
+        }
+
+        .header-link:hover {
+            color: #ceb3a1;
+            /* Change color on hover */
+            transform: rotate(-5deg) scale(1.1);
+            /* Rotate and scale on hover */
+        }
+
+
+        @media (max-width: 768px) {
+            body {
+                font-size: 14px;
+            }
+
+            header,
+            footer {
+                padding: 10px;
+            }
+
+            nav a {
+                margin: 0 5px;
+                font-size: 14px;
+            }
+
+            .center-image img {
+                max-width: 100%;
+                height: auto;
+            }
+
+            p,
+            h2 {
+                padding-left: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>我们的服务 - 拼车网</h1>
+    </header>
+    <nav>
+        <a class="header-link" href="/index.html">首页</a>
+        <a class="header-link" href="/about.html">关于我们</a>
+        <a class="header-link" href="/service.html">拼车服务</a>
+        <a class="header-link" href="/contact.html">联系我们</a>
+    </nav>
+
+    <main>
+        <h2>用户使用同意书</h2>
+        <p><a href="/Privacy Policy.pdf"> Privacy Policy </a></p>
+        <p><a href="/Terms of Service.pdf"> Terms of Service </a></p>
+        <h2>注册</h2>
+        <p>为保证各乘客及车主的安全，本网站将验证各个用户的身份。请如实填写<a href="https://docs.google.com/forms/d/e/1FAIpQLSevEwqjl6dkcETcXh7H9jRF9_SBcfCLz6V-1GJfVut9vSclyg/viewform?usp=sf_link" target="_blank">此表单</a>，并等待审核通过。审核通过后我们将通过邮箱将您的初始密码发送给您。使用初始密码登录后<b>请及时修改密码</b>，以便更好的保护您的个人信息。</p>
+        <h2>登录</h2>
+        <p>注册后方可在此处
+            <a href="http://3.145.121.62:8000/login">登录</a></p>
+        <p> <font color="grey"> 忘记密码？请参考<a href="/forget_password.html">此处</a> </font> 
+    </main>
+
+    <footer>
+        &copy; 2023 ucsbpinche.com
+    </footer>
+</body>
+</html>
